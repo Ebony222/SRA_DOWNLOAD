@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# install sra toolkit
+
+# extract fasta file from sra file
+fasterq-dump --fasta SRR16235266
+
+# visualize sequence
+head SRR16235266.fasta
+
+# configure prefetch to current working directory
+vdb-config --prefetch-to-cwd
+
+# download SRA file
+prefetch SRR15616379
+
+# split single end reads
+fasterq-dump SRR1561379
+
+# split paired end reads
+fasterq-dump SRR1561379 --split-files --skip-technical
+
+
+# Download multiple SRA files
+# List of accession numbers
+accessions=("SRA_accession1" "SRA_accession2" "SRA_accession3")
+
+# Loop over the accessions and download FASTA files
+for acc in "${accessions[@]}"
+do
+    fastq-dump --fasta $acc
+done
