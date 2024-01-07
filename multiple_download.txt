@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# using biopython to download files from database
+
+# install biopython (pip and conda are prerequisite for installation)
+
+conda install -c conda-forge biopython
+
+# biopython modules : entrez seqIO
+
+# information required : 
+# task: download (eftech)
+# identifier: id (accession no, GI no)
+# database: db (nucleotide, protein)
+# output format: rettype (fasta, genbank)
+# display format: retmode (text, xml)
+
+# Load the biopython entrez module
+from Bio import Entrez
+
+# load biopython SeqIO module
+from Bio import SeqIO
+
+# set your email
+Entrez.email = "rofiatoa14@gmail.com"
+
+# download and view sequences
+handle = Entrex.efetch (db = "protein", id= "BCZ08605.1")
+
+print(handle.read())
